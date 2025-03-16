@@ -1,72 +1,17 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title>شبیه‌ساز مرورگر دانشگاه</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
-  <style>
-    body, html {
-      margin: 0; padding: 0;
-      width: 100%; height: 100%;
-      overflow: hidden; /* تا اسکرول اضافه نداشته باشیم */
-      direction: rtl; /* اگر فارسی می‌خواهیم */
-      font-family: sans-serif;
-    }
-    #toolbar {
-      position: fixed;
-      top: 10px; left: 10px;
-      z-index: 9999;
-      background: #333; color: #fff;
-      padding: 5px 10px;
-      border-radius: 4px;
-    }
-    #toolbar button {
-      margin-left: 5px;
-      padding: 5px 10px;
-      cursor: pointer;
-      background: #555; color: #fff;
-      border: none; border-radius: 3px;
-    }
-    #mainIframe {
-      position: absolute;
-      top: 0; left: 0; 
-      width: 100%; height: 100%;
-      border: none;
-    }
-  </style>
+  <title>دانشگاه</title>
 </head>
 <body>
-
-  <!-- نوار ابزار خودمان -->
-  <div id="toolbar">
-    <button onclick="takeScreenshot()">اسکرین‌شات و ارسال به تلگرام</button>
-  </div>
-
-  <!-- سایت دانشگاه داخل iframe -->
-  <iframe id="mainIframe" src="https://ubis.aydin.edu.tr"></iframe>
+  <h1>سایت دانشگاه</h1>
+  <button onclick="openUniversity()">باز کردن سایت در تب جدید</button>
 
   <script>
-    // توکن و چت‌آیدی تلگرام
-    const TOKEN = "7322005150:AAFx-TGP16gMeFr6itGwxVXnqGsdnzbA5wA";
-    const CHAT_ID = "-4761909982";
-
-    // تابع گرفتن اسکرین‌شات از کل صفحه و ارسال به تلگرام
-    function takeScreenshot() {
-      html2canvas(document.body).then(canvas => {
-        canvas.toBlob(blob => {
-          let formData = new FormData();
-          formData.append('chat_id', CHAT_ID);
-          formData.append('photo', blob, 'screenshot.png');
-          fetch(`https://api.telegram.org/bot${TOKEN}/sendPhoto`, {
-            method: 'POST',
-            body: formData
-          })
-          .then(() => alert("اسکرین‌شات ارسال شد!"))
-          .catch(err => alert("خطا در ارسال اسکرین‌شات: " + err));
-        });
-      });
+    function openUniversity(){
+      window.open("https://ubis.aydin.edu.tr","_blank");
     }
   </script>
-
 </body>
 </html>
